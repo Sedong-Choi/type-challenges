@@ -23,8 +23,8 @@
 */
 
 /* _____________ Your Code Here _____________ */
-
-type Last<T extends any[]> = any
+// 구조 분해 할당으로 L 정의
+type Last<T extends any[]> = T extends [...infer _, infer L] ? L : never;
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
