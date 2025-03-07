@@ -38,11 +38,13 @@
 */
 
 /* _____________ Your Code Here _____________ */
-
-type Chainable = {
-  option(key: string, value: any): any
-  get(): any
-}
+type Chainable<T = {}> = {
+  option<K extends string, V>(
+    key: K extends keyof T ? never: K, // 동일한 key는 오류 표현
+    value: V
+  ): Chainable<Omit<T,K> & Record<K, V>>; // Omit을 사용해서 기존의 key값을 제거 후 override
+  get(): T;
+};
 
 /* _____________ Test Cases _____________ */
 import type { Alike, Expect } from '@type-challenges/utils'
