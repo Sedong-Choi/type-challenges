@@ -22,7 +22,12 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyAwaited<T> = any
+
+type MyAwaited<T> = T extends PromiseLike<infer U>
+  ? U extends PromiseLike<any> // 재귀적으로 확인
+    ? MyAwaited<U> 
+    : U
+  : never;
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
