@@ -17,9 +17,9 @@
 */
 
 /* _____________ Your Code Here _____________ */
-
+type IsEqual<T,U> = (<G>()=> G extends T  ? 1 : 0) extends (<G>()=> G extends U  ? 1 : 0) ? true : false;
 type Includes<T extends readonly any[], U> = T extends [infer First, ...infer Rest]
-  ? Equal<First, U> extends true
+  ? IsEqual<First, U> extends true
   ? true
   : Includes<Rest, U>
 : false
