@@ -33,9 +33,15 @@
 */
 
 /* _____________ Your Code Here _____________ */
-
-type MyReadonly2<T, K> = any
-
+type MyReadonly2<T, K extends keyof T = keyof T> = 
+// K 에 해당하는것은 모두 readonly
+{
+  readonly [P in K]: T[P];
+} & 
+// K 에 속하지 않으면 key 할당 하지 않음.
+{
+  [P in keyof T as P extends K ? never : P]: T[P];
+};
 /* _____________ Test Cases _____________ */
 import type { Alike, Expect } from '@type-challenges/utils'
 
