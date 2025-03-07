@@ -25,7 +25,11 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyReturnType<T> = any
+// TODO any로 해야만 하는가?
+// unknown으로 할경우 다음 경우 통과 못함.
+// MyReturnType<typeof fn>
+// MyReturnType<typeof fn1> 
+type MyReturnType<T> = T extends ((...args: any[])=> infer P) ?  P : never;
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
