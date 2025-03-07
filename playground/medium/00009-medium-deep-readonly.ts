@@ -35,12 +35,15 @@
 */
 
 /* _____________ Your Code Here _____________ */
-
-type DeepReadonly<T> = any
-
+type DeepReadonly<T> = T extends (...args: any[]) => any
+  ? T // function case
+  : T extends any[] // Array case
+  ? Readonly<{ [K in keyof T]: DeepReadonly<T[K]> }> 
+  : T extends object // object case
+  ? { readonly [P in keyof T]: DeepReadonly<T[P]> }
+  : T; // primitive case
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
-
 type cases = [
   Expect<Equal<DeepReadonly<X1>, Expected1>>,
   Expect<Equal<DeepReadonly<X2>, Expected2>>,
