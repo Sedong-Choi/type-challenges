@@ -22,9 +22,13 @@
 */
 
 /* _____________ Your Code Here _____________ */
+// TODO 다시 보기
+// 정답과 llm이용해서 품
+declare function PromiseAll<T extends unknown[]>(values: readonly [...T]):Promise<{[k in keyof T] : Awaited<T[k]>}> 
 
-declare function PromiseAll(values: any): any
-
+// declare function PromiseAll<T extends any[]>(values : readonly [...T]): Promise<{
+//   [K in keyof T]: T[K] extends Promise<infer R> | infer R ? R : never
+// }>
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
