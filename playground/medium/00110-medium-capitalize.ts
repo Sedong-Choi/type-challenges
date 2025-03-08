@@ -18,7 +18,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyCapitalize<S extends string> = any
+// string type에서 infer는 앞에서 부터 하나씩 분해한다.
+// 가장 마지막 infer는 나머지 모두 | 넘어갈경우 ''
+type MyCapitalize<S extends string> = S extends `${infer First}${infer Rest}` ? `${Uppercase<First>}${Rest}` : S
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
