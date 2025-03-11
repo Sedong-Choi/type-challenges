@@ -18,7 +18,11 @@
 
 /* _____________ Your Code Here _____________ */
 
-type ReplaceAll<S extends string, From extends string, To extends string> = any
+type ReplaceAll<S extends string, From extends string, To extends string> =
+S extends ''
+  ? S
+  : From extends '' ? S : S extends `${infer L}${From}${infer R}`
+    ? `${L}${To}${ReplaceAll<R, From, To>}` : S
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
