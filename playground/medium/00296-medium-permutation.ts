@@ -16,7 +16,12 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Permutation<T> = any
+type Permutation<T, K = T> =
+    [T] extends [never]
+      ? []
+      : K extends K
+        ? [K, ...Permutation<Exclude<T, K>>] // 자기 자신을 제외하여 조합 결정
+        : never
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
