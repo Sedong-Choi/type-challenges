@@ -18,8 +18,9 @@
 */
 
 /* _____________ Your Code Here _____________ */
+type Falsy = 0 | false | '' | [] | { [key: string]: never } | null | undefined
 
-type AnyOf<T extends readonly any[]> = any
+type AnyOf<T extends readonly any[]> = T[number] extends Falsy ? false : true
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
