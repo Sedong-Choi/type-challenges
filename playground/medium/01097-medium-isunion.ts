@@ -19,8 +19,9 @@
 */
 
 /* _____________ Your Code Here _____________ */
+// TODO 다시 확인하기
 
-type IsUnion<T> = any
+type IsUnion<T, C extends T = T> = (T extends T ? C extends T ? true : unknown : never) extends true ? false : true
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
