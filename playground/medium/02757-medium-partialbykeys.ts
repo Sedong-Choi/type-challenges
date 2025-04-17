@@ -26,7 +26,13 @@
 
 /* _____________ Your Code Here _____________ */
 
-type PartialByKeys<T, K> = any
+type Merge<T> = {
+  [P in keyof T]: T[P];
+}
+
+type PartialByKeys<T, K extends keyof T = keyof T> = Merge<
+  Omit<T, K> & Partial<Pick<T, K>>
+>
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

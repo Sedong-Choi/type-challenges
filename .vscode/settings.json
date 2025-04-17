@@ -3,7 +3,11 @@
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.sortKeys": true,
   "github.copilot.enable": {
-    "typescript": false
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
+    "typescript": true
   },
   "search.exclude": {
     "**/node_modules": true,
