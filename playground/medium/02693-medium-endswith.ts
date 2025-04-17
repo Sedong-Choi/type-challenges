@@ -20,8 +20,8 @@
 
 /* _____________ Your Code Here _____________ */
 
-type EndsWith<T extends string, U extends string> = any
-
+type EndsWith<T extends string, U extends string> = U extends '' ? true : T extends `${infer F}${infer R}` ?
+  U extends `${infer F2}${R}` ? R extends '' ? true : EndsWith<F, F2> : false : false
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
