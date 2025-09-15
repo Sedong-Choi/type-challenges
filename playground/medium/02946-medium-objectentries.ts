@@ -23,8 +23,20 @@
 
 /* _____________ Your Code Here _____________ */
 
-type ObjectEntries<T> = any
+type OptionalKeys<T> = {
+  [K in keyof T]-?: {} extends Pick<T, K> ? K : never
+}[keyof T]
 
+type CleanOptionalProp<T, K extends keyof T> =
+  [Exclude<T[K], undefined>] extends [never]
+    ? undefined
+    : Exclude<T[K], undefined>
+
+type ObjectEntries<T> = {
+  [K in keyof T]-?: K extends OptionalKeys<T>
+    ? [K, CleanOptionalProp<T, K>]
+    : [K, T[K]]
+}[keyof T]
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
