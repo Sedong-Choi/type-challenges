@@ -20,8 +20,11 @@
 */
 
 /* _____________ Your Code Here _____________ */
+type Reverse<T extends any[]> =
+  T extends [infer F, ...infer R] ? [...Reverse<R>, F] : []
 
-type FlipArguments<T> = any
+type FlipArguments<T extends (...args: any) => any> =
+  (...args: Reverse<Parameters<T>>) => ReturnType<T>
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
