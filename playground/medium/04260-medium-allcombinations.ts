@@ -18,9 +18,16 @@
 */
 
 /* _____________ Your Code Here _____________ */
+// String2Union<'abcd'> => 'a'|'b'|'c'|'d'
+type String2Union<S extends string> =
+  S extends `${infer F}${infer Rest}`
+    ? F | String2Union<Rest>
+    : never
 
-type AllCombinations<S> = any
-
+type AllCombinations<STR extends string, S extends string = String2Union<STR>> =
+  [S] extends [never] ?
+    ''
+    : '' | { [K in S]: `${K}${AllCombinations<never, Exclude<S, K>>}` }[S]
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
